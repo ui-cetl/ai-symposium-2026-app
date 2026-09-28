@@ -1,4 +1,25 @@
-Welcome to your new TanStack Start app!
+# CETL AI Symposium 2026 Website
+
+An informational website for the CETL AI Symposium 2026 remote and on site attendees, handling:
+* Schedule
+  - Talks:
+    - Abstracts
+    - Resources
+    - Artifacts/Handouts
+    - Zoom Links?
+    - Map?
+* Announcements
+* Other relevant information
+
+Notes:
+* Pitman Center Map may be confusing
+* Not including Zoom Passwords
+* No logins
+* No recordings
+
+---
+
+Welcome to your new TanStack Router app!
 
 # Getting Started
 
@@ -101,47 +122,6 @@ export const Route = createRootRoute({
 
 More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
 
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
 
 ## Data Fetching
 
@@ -179,5 +159,3 @@ Loaders simplify your data fetching logic dramatically. Check out more informati
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
