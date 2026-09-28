@@ -9,6 +9,9 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 
+import { TrackBadge } from '../components/TrackBadge/TrackBadge'
+import styles from './index.module.css'
+
 export const Route = createFileRoute('/')({ component: Home })
 
 type Session = {
@@ -36,7 +39,10 @@ const columnHelper = createColumnHelper<typeof features, Session>()
 const columns = columnHelper.columns([
   columnHelper.accessor('title', { header: 'Session' }),
   columnHelper.accessor('speaker', { header: 'Speaker' }),
-  columnHelper.accessor('track', { header: 'Track' }),
+  columnHelper.accessor('track', {
+    header: 'Track',
+    cell: (info) => <TrackBadge track={info.getValue()} />,
+  }),
   columnHelper.accessor('time', { header: 'Time' }),
 ])
 
@@ -52,39 +58,41 @@ function Home() {
   })
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">AI Symposium 2026</h1>
-      <p className="mt-4 text-lg">Schedule of sessions</p>
+    <div className={styles.page}>
+      <h1>AI Symposium 2026</h1>
+      <p className={styles.lede}>Schedule of sessions</p>
 
-      <table className="mt-6 w-full border-collapse text-left">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  className="cursor-pointer select-none border-b border-gray-300 px-4 py-2 font-semibold"
-                  onClick={header.column.getToggleSortingHandler()}
-                >
-                  {header.isPlaceholder ? null : <table.FlexRender header={header} />}
-                  {{ asc: ' ▲', desc: ' ▼' }[header.column.getIsSorted() as string] ?? null}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="odd:bg-gray-50">
-              {row.getAllCells().map((cell) => (
-                <td key={cell.id} className="border-b border-gray-200 px-4 py-2">
-                  <table.FlexRender cell={cell} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th
+                    key={header.id}
+                    className={styles.th}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    {header.isPlaceholder ? null : <table.FlexRender header={header} />}
+                    {{ asc: ' ▲', desc: ' ▼' }[header.column.getIsSorted() as string] ?? null}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className={styles.row}>
+                {row.getAllCells().map((cell) => (
+                  <td key={cell.id} className={styles.td}>
+                    <table.FlexRender cell={cell} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

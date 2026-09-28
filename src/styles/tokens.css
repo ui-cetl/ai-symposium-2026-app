@@ -1,0 +1,114 @@
+/**
+ * Design tokens for the CETL AI Symposium 2026 site.
+ *
+ * Brand palette (University of Idaho / Vandals):
+ *   Primary: Silver #808080, Steel #323232, Black #000000, White #FFFFFF,
+ *            Pride Gold #F1B300
+ *   Accents (reserved for track/category color-coding, not general UI decor):
+ *            Raspberry #D7003F, Garnet #7A0017, Lupine #5E48FF,
+ *            Huckleberry #261882, Clearwater #008080, Palouse #034441,
+ *            Leather #AB4700, Bark #552301
+ *
+ * Pride Gold fails WCAG AA as a fill behind white text (~1.7:1). Always pair
+ * --color-accent with --color-accent-ink (dark text), never white, when used
+ * as a background fill.
+ */
+
+:root {
+  /* Raw brand colors */
+  --brand-silver: #808080;
+  --brand-steel: #323232;
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+  --brand-gold: #f1b300;
+
+  --brand-raspberry: #d7003f;
+  --brand-garnet: #7a0017;
+  --brand-lupine: #5e48ff;
+  --brand-huckleberry: #261882;
+  --brand-clearwater: #008080;
+  --brand-palouse: #034441;
+  --brand-leather: #ab4700;
+  --brand-bark: #552301;
+
+  /* Track/category accents — ordered lookup for badge assignment */
+  --track-accent-1: var(--brand-lupine);
+  --track-accent-2: var(--brand-raspberry);
+  --track-accent-3: var(--brand-clearwater);
+  --track-accent-4: var(--brand-leather);
+  --track-accent-5: var(--brand-garnet);
+  --track-accent-6: var(--brand-huckleberry);
+  --track-accent-7: var(--brand-palouse);
+  --track-accent-8: var(--brand-bark);
+
+  /* Semantic color roles — light theme (default) */
+  --color-bg: var(--brand-white);
+  --color-surface: #f6f5f3;
+  --color-surface-raised: var(--brand-white);
+  --color-text: #1c1c1c;
+  --color-text-muted: #565656;
+  --color-border: #d9d9d9;
+  --color-link: #1d4ed8;
+  --color-link-visited: var(--brand-huckleberry);
+  --color-accent: var(--brand-gold);
+  --color-accent-ink: #241a00;
+  --color-focus-ring: var(--brand-gold);
+
+  --color-header-bg: var(--brand-white);
+  --color-footer-bg: var(--brand-steel);
+  --color-footer-text: #ededed;
+
+  /* Typography */
+  --font-heading: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Fluid type scale (Utopia-style clamp) */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.4rem);
+  --step-2: clamp(1.44rem, 1.32rem + 0.6vw, 1.75rem);
+  --step-3: clamp(1.73rem, 1.55rem + 0.9vw, 2.2rem);
+  --step-4: clamp(2.07rem, 1.8rem + 1.35vw, 2.75rem);
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.55;
+
+  /* Fluid space scale */
+  --space-2xs: clamp(0.25rem, 0.23rem + 0.1vw, 0.3rem);
+  --space-xs: clamp(0.5rem, 0.46rem + 0.2vw, 0.6rem);
+  --space-s: clamp(0.75rem, 0.69rem + 0.3vw, 0.9rem);
+  --space-m: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+  --space-l: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+  --space-xl: clamp(2.4rem, 2rem + 1.8vw, 3.4rem);
+  --space-2xl: clamp(3.6rem, 3rem + 2.8vw, 5rem);
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --max-content-width: 72rem;
+  --max-prose-width: 42rem;
+}
+
+[data-theme='dark'] {
+  --color-bg: #17181a;
+  --color-surface: #202226;
+  --color-surface-raised: #26282c;
+  --color-text: #f0f0ef;
+  --color-text-muted: #b9bac0;
+  --color-border: #3a3c40;
+  --color-link: #8ab4ff;
+  --color-link-visited: #b9a6ff;
+  --color-accent: var(--brand-gold);
+  --color-accent-ink: #241a00;
+  --color-focus-ring: var(--brand-gold);
+
+  --color-header-bg: #1d1f22;
+  --color-footer-bg: #0f1011;
+  --color-footer-text: #d6d6d6;
+
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-m: 0 4px 16px rgba(0, 0, 0, 0.5);
+}

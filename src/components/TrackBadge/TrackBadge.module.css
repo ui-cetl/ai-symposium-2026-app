@@ -1,0 +1,14 @@
+.badge {
+  --badge-color: var(--brand-silver);
+
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--badge-color);
+  background: color-mix(in srgb, var(--badge-color) 14%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, var(--badge-color) 45%, transparent);
+  border-radius: 999px;
+  padding: var(--space-2xs) var(--space-s);
+  white-space: nowrap;
+}
