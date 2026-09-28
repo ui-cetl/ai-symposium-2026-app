@@ -1,0 +1,11 @@
+# Physical rooms used for on-site sessions.
+# `id` is referenced by `room:` in the block files under ./blocks/.
+- id: room-a
+  name: Ballroom A
+  number: '101'
+- id: room-b
+  name: Ballroom B
+  number: '102'
+- id: room-c
+  name: Meeting Room C
+  number: '103'

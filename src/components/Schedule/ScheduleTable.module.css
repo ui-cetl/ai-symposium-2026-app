@@ -1,0 +1,102 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.blockHeading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-m);
+  margin: 0;
+}
+
+.blockTime {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.caption {
+  text-align: left;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding-bottom: var(--space-xs);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  background: var(--color-surface-raised);
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-s) var(--space-m);
+  vertical-align: top;
+}
+
+.table thead th {
+  background: var(--color-surface);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.roomCell {
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--color-surface);
+}
+
+.timeCell {
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sessionTitle {
+  font-weight: 600;
+}
+
+.abstract {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+  max-width: var(--max-prose-width);
+}
+
+.links {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--step--1);
+}
+
+.joinInfo {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.breakRow {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.breakLabel {
+  color: var(--color-text-muted);
+  font-style: italic;
+}

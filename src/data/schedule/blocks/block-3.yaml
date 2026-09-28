@@ -1,0 +1,82 @@
+# Block 3: Room A runs one 35-minute session followed by a 40-minute break;
+# Room B splits into two 35-minute sessions with a 5-minute break; Room C
+# runs one full-length session.
+id: block-3
+label: Block 3 · Afternoon
+startTime: '13:00'
+durationMinutes: 75
+
+rooms:
+  - room: room-a
+    items:
+      - kind: session
+        id: block-3-room-a-1
+        title: Ethics in Autonomous Systems
+        speakers: [John McCarthy]
+        track: Ethics
+        durationMinutes: 35
+        abstract: >
+          An on-site repeat of the morning's remote session, for attendees
+          who could not join live.
+      - kind: break
+        durationMinutes: 40
+        label: Room reset
+
+  - room: room-b
+    items:
+      - kind: session
+        id: block-3-room-b-1
+        title: Prompt Engineering for Domain Experts
+        speakers: [Grace Hopper]
+        track: Design
+        durationMinutes: 35
+        abstract: >
+          Teaching non-engineers to write reliable prompts for their own
+          workflows.
+      - kind: break
+        durationMinutes: 5
+        label: Room changeover
+      - kind: session
+        id: block-3-room-b-2
+        title: Guardrails and Safety Filters
+        speakers: [Alan Turing]
+        track: Infrastructure
+        durationMinutes: 35
+        abstract: >
+          Layered approaches to catching unsafe model output before it
+          reaches a user.
+
+  - room: room-c
+    items:
+      - kind: session
+        id: block-3-room-c-1
+        title: Multi-Agent Collaboration
+        speakers: [Margaret Hamilton]
+        track: Research
+        durationMinutes: 75
+        abstract: >
+          Closing session on coordinating multiple specialized agents
+          toward a shared goal.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/multi-agent.pdf
+
+remote:
+  - id: block-3-remote-1
+    title: The Future of Agentic AI (remote encore)
+    speakers: [Ada Lovelace]
+    track: Engineering
+    durationMinutes: 75
+    joinInfo: Zoom link emailed to registered remote attendees
+  - id: block-3-remote-2
+    title: Scaling LLM Inference (Q&A follow-up)
+    speakers: [Alan Turing]
+    track: Infrastructure
+    durationMinutes: 35
+    joinInfo: Zoom link emailed to registered remote attendees
+  - id: block-3-remote-3
+    title: Open Office Hours
+    speakers: [CETL AI Symposium Team]
+    track: Research
+    durationMinutes: 35
+    joinInfo: Zoom link emailed to registered remote attendees
