@@ -28,11 +28,13 @@ function RootComponent() {
   return (
     <>
       <HeadContent />
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
+      <div className="app-shell">
+        <Header />
+        <main className="app-main">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
       <TanStackDevtools
         config={{
           position: 'bottom-right',

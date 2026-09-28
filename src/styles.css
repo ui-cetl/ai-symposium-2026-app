@@ -13,6 +13,16 @@ body,
   min-height: 100%;
 }
 
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+}
+
 html {
   color-scheme: light;
 }
