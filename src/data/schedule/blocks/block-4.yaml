@@ -1,0 +1,62 @@
+# Block 4: Closing session — two back-to-back talks in the main room
+# (Ballroom A), with a short changeover break, no parallel tracks or
+# remote-only sessions. Starts at 14:15, exactly when Block 3's room-a
+# session ends, so there's no double-booking of the room.
+id: block-4
+label: Closing · Wrap-Up
+startTime: '14:15'
+durationMinutes: 75
+
+rooms:
+  - room: room-a
+    items:
+      - kind: session
+        id: block-4-room-a-1
+        title: 'Closing Keynote: Practical Next Steps for AI Adoption'
+        speakers: [Ada Lovelace]
+        track: Keynote
+        durationMinutes: 35
+        abstract: >
+          Turning a day of ideas into a concrete plan: what to try first,
+          what to defer, and how to measure whether it's working.
+        description: >
+          Every session today offered a piece of the puzzle — architecture,
+          ethics, guardrails, evaluation — but turning that into an actual
+          adoption plan is its own skill. This closing keynote proposes a
+          simple three-month roadmap template for teams heading home from
+          the symposium: one small, safe pilot; one measurable success
+          criterion; and one explicit checkpoint for deciding whether to
+          expand, pause, or stop. We'll walk through how to fill it in live.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/closing-keynote-next-steps.pdf
+        artifacts:
+          - label: Adoption roadmap template
+            url: https://example.org/symposium/artifacts/adoption-roadmap-template
+      - kind: break
+        durationMinutes: 5
+        label: Room changeover
+      - kind: session
+        id: block-4-room-a-2
+        title: 'Closing Remarks: Building What Comes Next'
+        speakers: [Margaret Hamilton]
+        track: Keynote
+        durationMinutes: 35
+        abstract: >
+          A final wrap-up connecting today's themes, thanking speakers and
+          organizers, and previewing what's planned for next year.
+        description: >
+          To close out the day, a short synthesis of the threads that ran
+          through every session — partnership over replacement, evidence
+          over hype, and accountability designed in from the start — along
+          with thanks to the speakers, organizers, and attendees who made
+          the symposium possible. We'll end with a preview of next year's
+          themes and how to get involved in shaping them.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/closing-remarks.pdf
+        artifacts:
+          - label: Symposium recap notes
+            url: https://example.org/symposium/artifacts/symposium-recap-notes
+
+remote: []
