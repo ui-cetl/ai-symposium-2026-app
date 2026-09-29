@@ -12,6 +12,9 @@ export function Header() {
         </Link>
         <nav className={styles.nav} aria-label="Primary">
           <Link to="/" className={styles.navLink} activeOptions={{ exact: true }}>
+            Home
+          </Link>
+          <Link to="/schedule" className={styles.navLink}>
             Schedule
           </Link>
         </nav>

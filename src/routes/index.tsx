@@ -1,18 +1,26 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ScheduleTable } from '../components/Schedule/ScheduleTable'
+import { Highlights } from '../components/Highlights/Highlights'
 import { schedule } from '../data/schedule/loadSchedule'
+import { computeScheduleStats } from '../data/schedule/stats'
 import styles from './index.module.css'
 
 export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
+  const stats = computeScheduleStats(schedule)
+
   return (
     <div className={styles.page}>
-      <h1>AI Symposium 2026</h1>
-      <p className={styles.lede}>Schedule of sessions</p>
+      <section className={styles.hero}>
+        <h1>CETL AI Symposium 2026</h1>
+        <p className={styles.lede}>
+          A one-day, hybrid symposium for on-site and remote attendees &mdash; talks,
+          abstracts, resources, and handouts, all in one place.
+        </p>
+      </section>
 
-      <ScheduleTable schedule={schedule} />
+      <Highlights stats={stats} openingBlock={schedule.blocks[0]} />
     </div>
   )
 }

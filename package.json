@@ -23,6 +23,7 @@
     "@tanstack/devtools-vite": "latest",
     "@tanstack/router-cli": "^1.132.0",
     "@tanstack/router-plugin": "latest",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
