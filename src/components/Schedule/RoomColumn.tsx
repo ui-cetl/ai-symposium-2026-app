@@ -32,13 +32,12 @@ export function RoomColumn({ roomName, roomTrack, blockStart }: Readonly<RoomCol
           return (
             <SessionCard
               key={item.id}
+              id={item.id}
               timeRange={timeRange}
               title={item.title}
               speakers={item.speakers}
               track={item.track}
               abstract={item.abstract}
-              resources={item.resources}
-              artifacts={item.artifacts}
             />
           )
         })}

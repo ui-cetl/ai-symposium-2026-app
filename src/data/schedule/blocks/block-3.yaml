@@ -18,6 +18,20 @@ rooms:
         abstract: >
           An on-site repeat of the morning's remote session, for attendees
           who could not join live.
+        description: >
+          As autonomous systems take on higher-stakes decisions, existing
+          accountability frameworks built around human decision-makers start
+          to strain. This on-site repeat covers the same ground as the
+          morning's remote session: emerging governance models for shared
+          human-AI accountability, where liability currently falls when an
+          autonomous system causes harm, and a practical oversight checklist
+          for teams deploying autonomous decision-making systems.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/ethics-autonomous-systems.pdf
+        artifacts:
+          - label: Governance checklist
+            url: https://example.org/symposium/artifacts/autonomous-systems-checklist
       - kind: break
         durationMinutes: 40
         label: Room reset
@@ -33,6 +47,19 @@ rooms:
         abstract: >
           Teaching non-engineers to write reliable prompts for their own
           workflows.
+        description: >
+          Domain experts often know exactly what they want from a model but
+          struggle to express it in a prompt that behaves consistently.
+          This talk shares a teaching approach built around reusable prompt
+          templates, structured examples, and a short feedback loop that
+          lets non-engineers iterate on their own prompts without needing to
+          understand the underlying model architecture.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/prompt-engineering-domain-experts.pdf
+        artifacts:
+          - label: Prompt template library
+            url: https://example.org/symposium/artifacts/prompt-template-library
       - kind: break
         durationMinutes: 5
         label: Room changeover
@@ -45,6 +72,20 @@ rooms:
         abstract: >
           Layered approaches to catching unsafe model output before it
           reaches a user.
+        description: >
+          No single guardrail catches everything, so production systems end
+          up layering several: input classifiers, output filters, and
+          rule-based fallbacks that intervene when a model's confidence is
+          low. This talk compares these layers, discusses their respective
+          latency and false-positive costs, and shares a monitoring
+          approach for catching guardrail failures before they become
+          incidents.
+        resources:
+          - label: Slides
+            url: https://example.org/symposium/slides/guardrails-safety-filters.pdf
+        artifacts:
+          - label: Filter rule set
+            url: https://example.org/symposium/artifacts/safety-filter-rules
 
   - room: room-c
     items:
@@ -57,9 +98,20 @@ rooms:
         abstract: >
           Closing session on coordinating multiple specialized agents
           toward a shared goal.
+        description: >
+          Closing out the day, this session pulls together the coordination
+          patterns discussed throughout the symposium into a single working
+          example: a small team of specialized agents handling an
+          end-to-end task with supervisor oversight, shared memory, and
+          graceful handoff when one agent gets stuck. We will trace a full
+          run live, including what happens when a step fails partway
+          through.
         resources:
           - label: Slides
             url: https://example.org/symposium/slides/multi-agent.pdf
+        artifacts:
+          - label: Reference implementation
+            url: https://example.org/symposium/artifacts/multi-agent-reference
 
 remote:
   - id: block-3-remote-1
@@ -68,15 +120,60 @@ remote:
     track: Engineering
     durationMinutes: 75
     joinInfo: Zoom link emailed to registered remote attendees
+    abstract: >
+      A remote encore of the morning keynote, for attendees in a different
+      time zone.
+    description: >
+      Agentic AI systems are moving from research demos to production
+      workloads faster than most organizations are ready for. This encore
+      session covers the same ground as the morning keynote: durable
+      architectural patterns, recurring operational failure modes, and open
+      research questions, followed by a live Q&A tailored to remote
+      attendees' questions.
+    resources:
+      - label: Slides
+        url: https://example.org/symposium/slides/agentic-ai.pdf
+    artifacts:
+      - label: Reference architecture repo
+        url: https://example.org/symposium/artifacts/agentic-ai-reference-arch
   - id: block-3-remote-2
     title: Scaling LLM Inference (Q&A follow-up)
     speakers: [Alan Turing]
     track: Infrastructure
     durationMinutes: 35
     joinInfo: Zoom link emailed to registered remote attendees
+    abstract: >
+      An open Q&A follow-up to the morning's inference scaling session, for
+      remote attendees.
+    description: >
+      A focused, question-driven follow-up to the morning's inference
+      scaling talk. Bring your own batching, quantization, or GPU sharding
+      questions — we will work through real numbers from attendees'
+      production systems where possible, rather than repeating the original
+      slide deck.
+    resources:
+      - label: Recording
+        url: https://example.org/symposium/recordings/scaling-llm-inference-qa.mp4
+    artifacts:
+      - label: Benchmark harness
+        url: https://example.org/symposium/artifacts/llm-inference-benchmarks
   - id: block-3-remote-3
     title: Open Office Hours
     speakers: [CETL AI Symposium Team]
     track: Research
     durationMinutes: 35
     joinInfo: Zoom link emailed to registered remote attendees
+    abstract: >
+      Drop-in time with the organizing team for questions that didn't fit
+      into a formal session.
+    description: >
+      An informal, drop-in session with the CETL AI Symposium organizing
+      team. Bring questions about anything from the day's sessions,
+      requests for follow-up resources, or ideas for next year's program.
+      No fixed agenda — come and go as needed.
+    resources:
+      - label: Symposium feedback form
+        url: https://example.org/symposium/resources/feedback-form
+    artifacts:
+      - label: Session recordings index
+        url: https://example.org/symposium/artifacts/recordings-index

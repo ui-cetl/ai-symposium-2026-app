@@ -35,13 +35,12 @@ export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
                 {block.remote.map((session) => (
                   <SessionCard
                     key={session.id}
+                    id={session.id}
                     timeRange={formatTimeRange(block.startTime, session.durationMinutes)}
                     title={session.title}
                     speakers={session.speakers}
                     track={session.track}
                     abstract={session.abstract}
-                    resources={session.resources}
-                    artifacts={session.artifacts}
                     joinInfo={session.joinInfo}
                   />
                 ))}

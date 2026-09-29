@@ -23,7 +23,10 @@ export interface SessionInfo {
   title: string
   speakers: Array<string>
   track?: string
+  /** Short teaser shown on the schedule card. */
   abstract?: string
+  /** Long-form write-up shown only on the session's details page. */
+  description?: string
   resources?: Array<ResourceLink>
   artifacts?: Array<ResourceLink>
 }

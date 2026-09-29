@@ -1,0 +1,38 @@
+.page {
+  max-width: var(--max-prose-width);
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-m);
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: var(--space-m);
+  font-size: var(--step--1);
+  color: var(--color-link);
+}
+
+.title {
+  margin: 0 0 var(--space-2xs);
+}
+
+.meta {
+  margin: 0 0 var(--space-s);
+  color: var(--color-text-muted);
+  font-size: var(--step--1);
+}
+
+.speakers {
+  margin: var(--space-s) 0 0;
+  color: var(--color-text-muted);
+}
+
+.joinInfo {
+  margin: var(--space-2xs) 0 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.body {
+  margin-top: var(--space-m);
+  white-space: pre-line;
+}

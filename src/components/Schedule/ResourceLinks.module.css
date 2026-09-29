@@ -1,0 +1,9 @@
+.links {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--step--1);
+}
+
+.links a {
+  display: inline-block;
+  padding-block: var(--space-2xs);
+}
