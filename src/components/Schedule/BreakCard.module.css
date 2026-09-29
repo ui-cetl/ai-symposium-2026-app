@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-s) var(--space-m);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-m);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.time {
+  margin: 0;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.label {
+  margin: 0;
+  font-size: var(--step--1);
+}

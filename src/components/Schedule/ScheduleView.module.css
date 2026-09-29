@@ -1,0 +1,53 @@
+/* Mobile/desktop breakpoint used throughout the schedule components: 640px. */
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.blockHeading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  margin: 0;
+}
+
+.blockTime {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.groupHeading {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.roomGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--space-m);
+  align-items: start;
+}
+
+.remoteGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--space-m);
+}

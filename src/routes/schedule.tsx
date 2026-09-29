@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ScheduleTable } from '../components/Schedule/ScheduleTable'
+import { ScheduleView } from '../components/Schedule/ScheduleView'
 import { schedule } from '../data/schedule/loadSchedule'
 import styles from './schedule.module.css'
 
@@ -15,7 +15,7 @@ function SchedulePage() {
         sessions.
       </p>
 
-      <ScheduleTable schedule={schedule} />
+      <ScheduleView schedule={schedule} />
     </div>
   )
 }
