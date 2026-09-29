@@ -26,6 +26,28 @@
   color: var(--color-text-muted);
 }
 
+.selectButton {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  padding-inline: var(--space-s);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-s);
+}
+
+.selectButtonActive {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
 .joinInfo {
   margin: var(--space-2xs) 0 0;
   font-style: italic;

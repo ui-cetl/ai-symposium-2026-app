@@ -8,9 +8,17 @@ export interface RoomColumnProps {
   roomName: string
   roomTrack: RoomTrack
   blockStart: string
+  isSelected: (id: string) => boolean
+  onToggleSelect: (id: string) => void
 }
 
-export function RoomColumn({ roomName, roomTrack, blockStart }: Readonly<RoomColumnProps>) {
+export function RoomColumn({
+  roomName,
+  roomTrack,
+  blockStart,
+  isSelected,
+  onToggleSelect,
+}: Readonly<RoomColumnProps>) {
   const timedItems = withTiming(roomTrack.items, blockStart)
 
   return (
@@ -38,6 +46,8 @@ export function RoomColumn({ roomName, roomTrack, blockStart }: Readonly<RoomCol
               speakers={item.speakers}
               track={item.track}
               abstract={item.abstract}
+              isSelected={isSelected(item.id)}
+              onToggleSelect={() => onToggleSelect(item.id)}
             />
           )
         })}

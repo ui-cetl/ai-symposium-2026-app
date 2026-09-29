@@ -1,11 +1,13 @@
 import type { Schedule } from '../../data/schedule/types'
 import { formatTimeRange } from '../../data/schedule/timing'
+import { useMySchedule } from '../../hooks/useMySchedule'
 import { RoomColumn } from './RoomColumn'
 import { SessionCard } from './SessionCard'
 import styles from './ScheduleView.module.css'
 
 export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
   const roomName = (id: string) => schedule.rooms.find((room) => room.id === id)?.name ?? id
+  const { isSelected, toggle } = useMySchedule(schedule)
 
   return (
     <div className={styles.schedule}>
@@ -24,6 +26,8 @@ export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
                 roomName={roomName(roomTrack.room)}
                 roomTrack={roomTrack}
                 blockStart={block.startTime}
+                isSelected={isSelected}
+                onToggleSelect={toggle}
               />
             ))}
           </div>
@@ -42,6 +46,8 @@ export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
                     track={session.track}
                     abstract={session.abstract}
                     joinInfo={session.joinInfo}
+                    isSelected={isSelected(session.id)}
+                    onToggleSelect={() => toggle(session.id)}
                   />
                 ))}
               </ol>

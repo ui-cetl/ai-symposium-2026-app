@@ -10,6 +10,12 @@
   box-shadow: var(--shadow-s);
 }
 
+.cardSelected {
+  border-color: var(--color-accent);
+  border-width: 2px;
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface-raised));
+}
+
 .time {
   margin: 0;
   font-size: var(--step--1);
@@ -42,7 +48,6 @@
 }
 
 .viewDetails {
-  margin-top: var(--space-2xs);
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--color-link);
@@ -50,5 +55,34 @@
   min-height: 44px;
   display: flex;
   align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+  margin-top: var(--space-2xs);
+}
+
+.selectButton {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  padding-inline: var(--space-s);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.selectButtonActive {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
