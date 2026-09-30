@@ -19,3 +19,33 @@
   max-width: var(--max-prose-width);
   margin: 0;
 }
+
+.notices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.notices p {
+  margin: 0;
+}
+
+.cta {
+  align-self: flex-start;
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  padding: var(--space-s) var(--space-l);
+  border-radius: var(--radius-m);
+  text-decoration: none;
+}
+
+.cta:visited {
+  color: var(--color-accent-ink);
+}
+
+.cta:hover {
+  background: color-mix(in srgb, var(--color-accent) 85%, var(--color-text));
+}

@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import type { ResolvedSession } from '../../data/schedule/sessions'
-import { TrackBadge } from '../TrackBadge/TrackBadge'
+import { SessionCard } from '../Schedule/SessionCard'
 import styles from './MySchedule.module.css'
 
 export function MySchedule({ sessions }: Readonly<{ sessions: Array<ResolvedSession> }>) {
@@ -22,19 +22,21 @@ export function MySchedule({ sessions }: Readonly<{ sessions: Array<ResolvedSess
       <h2 className={styles.heading}>My Schedule</h2>
       <ol className={styles.list}>
         {sessions.map((session) => (
-          <li key={session.id} className={styles.item}>
-            <p className={styles.time}>{session.timeRange}</p>
-            <Link to="/sessions/$sessionId" params={{ sessionId: session.id }} className={styles.title}>
-              {session.title}
-            </Link>
-            <p className={styles.location}>
-              {session.blockLabel} · {session.location}
-            </p>
-            {session.track && <TrackBadge track={session.track} />}
-            <p className={styles.speakers}>{session.speakers.join(', ')}</p>
-          </li>
+          <SessionCard
+            key={session.id}
+            id={session.id}
+            title={session.title}
+            speakers={session.speakers}
+            track={session.track}
+            timeRange={session.timeRange}
+            location={session.location}
+            abstract={session.abstract}
+            joinInfo={session.joinInfo}
+            isSelected={true}
+          />
         ))}
       </ol>
     </div>
   )
 }
+

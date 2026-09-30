@@ -1,16 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 
-import { Highlights } from '../components/Highlights/Highlights'
 import { MySchedule } from '../components/MySchedule/MySchedule'
 import { schedule } from '../data/schedule/loadSchedule'
-import { computeScheduleStats } from '../data/schedule/stats'
 import { useMySchedule } from '../hooks/useMySchedule'
 import styles from './index.module.css'
 
 export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
-  const stats = computeScheduleStats(schedule)
   const { selectedSessions } = useMySchedule(schedule)
 
   return (
@@ -19,13 +16,22 @@ function Home() {
         <h1>CETL AI Symposium 2026</h1>
         <p className={styles.lede}>
           A one-day, hybrid symposium for on-site and remote attendees &mdash; talks,
-          abstracts, resources, and handouts, all in one place.
+          abstracts, resources, and handouts, all in one place. Build your day below by
+          picking the sessions you want to attend, or browse the full schedule to see
+          everything on offer.
         </p>
       </section>
 
-      <Highlights stats={stats} openingBlock={schedule.blocks[0]} />
-
       <MySchedule sessions={selectedSessions} />
+
+      <div className={styles.notices}>
+        <p>On-site at the Pitman Center, or join remotely &mdash; no login required.</p>
+        <p>Sessions are not recorded. Zoom links are emailed to registered attendees only.</p>
+      </div>
+
+      <Link to="/schedule" className={styles.cta}>
+        View full schedule
+      </Link>
     </div>
   )
 }

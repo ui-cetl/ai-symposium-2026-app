@@ -1,60 +1,74 @@
+import type { CSSProperties } from 'react'
+
 import type { Schedule } from '../../data/schedule/types'
-import { formatTimeRange } from '../../data/schedule/timing'
+import { buildBlockTimeline } from '../../data/schedule/timeline'
+import { formatTime, formatTimeRange } from '../../data/schedule/timing'
 import { useMySchedule } from '../../hooks/useMySchedule'
-import { RoomColumn } from './RoomColumn'
+import { BreakCard } from './BreakCard'
 import { SessionCard } from './SessionCard'
 import styles from './ScheduleView.module.css'
 
 export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
-  const roomName = (id: string) => schedule.rooms.find((room) => room.id === id)?.name ?? id
   const { isSelected, toggle } = useMySchedule(schedule)
 
   return (
     <div className={styles.schedule}>
-      {schedule.blocks.map((block) => (
-        <section key={block.id} className={styles.block} aria-labelledby={`${block.id}-heading`}>
-          <h2 id={`${block.id}-heading`} className={styles.blockHeading}>
-            {block.label}
-            <span className={styles.blockTime}>{formatTimeRange(block.startTime, block.durationMinutes)}</span>
-          </h2>
+      {schedule.blocks.map((block) => {
+        const timeline = buildBlockTimeline(schedule, block)
+        const gridStyle = { '--column-count': timeline.columnCount } as CSSProperties
 
-          <h3 className={styles.groupHeading}>On-site sessions</h3>
-          <div className={styles.roomGrid}>
-            {block.rooms.map((roomTrack) => (
-              <RoomColumn
-                key={roomTrack.room}
-                roomName={roomName(roomTrack.room)}
-                roomTrack={roomTrack}
-                blockStart={block.startTime}
-                isSelected={isSelected}
-                onToggleSelect={toggle}
-              />
-            ))}
-          </div>
+        return (
+          <section key={block.id} className={styles.block} aria-labelledby={`${block.id}-heading`}>
+            <h2 id={`${block.id}-heading`} className={styles.blockHeading}>
+              {block.label}
+              <span className={styles.blockTime}>{formatTimeRange(block.startTime, block.durationMinutes)}</span>
+            </h2>
 
-          {block.remote.length > 0 && (
-            <>
-              <h3 className={styles.groupHeading}>Remote sessions</h3>
-              <ol className={styles.remoteGrid}>
-                {block.remote.map((session) => (
+            <ol className={styles.timelineGrid} style={gridStyle}>
+              {timeline.entries.map((entry) => {
+                const entryStyle = {
+                  '--col': entry.column + 1,
+                  '--row-start': entry.rowStart,
+                  '--row-span': entry.rowSpan,
+                } as CSSProperties
+                const timeRange = `${formatTime(entry.start)}\u2013${formatTime(entry.end)}`
+
+                if (entry.kind === 'break') {
+                  return (
+                    <BreakCard
+                      key={entry.key}
+                      timeRange={timeRange}
+                      durationMinutes={entry.durationMinutes}
+                      label={entry.label}
+                      style={entryStyle}
+                    />
+                  )
+                }
+
+                const session = entry.session
+                if (!session) return null
+
+                return (
                   <SessionCard
-                    key={session.id}
+                    key={entry.key}
                     id={session.id}
-                    timeRange={formatTimeRange(block.startTime, session.durationMinutes)}
+                    timeRange={timeRange}
+                    location={entry.location}
                     title={session.title}
                     speakers={session.speakers}
                     track={session.track}
                     abstract={session.abstract}
-                    joinInfo={session.joinInfo}
+                    joinInfo={entry.joinInfo}
                     isSelected={isSelected(session.id)}
                     onToggleSelect={() => toggle(session.id)}
+                    style={entryStyle}
                   />
-                ))}
-              </ol>
-            </>
-          )}
-        </section>
-      ))}
+                )
+              })}
+            </ol>
+          </section>
+        )
+      })}
     </div>
   )
 }
