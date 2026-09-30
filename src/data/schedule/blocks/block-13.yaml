@@ -7,6 +7,9 @@ label: No-Host Social
 startTime: '17:00'
 durationMinutes: 120
 location: Hunga Dunga, 333 N Jackson St, Moscow, ID
+# Off-site and optional — excluded from the first-visit auto-enrollment
+# default (unlike the on-site whole-audience plenary sessions).
+optional: true
 
 item:
   kind: session

@@ -66,6 +66,13 @@ export interface PlenaryBlock {
   startTime: string
   durationMinutes: number
   location?: string
+  /**
+   * If true, this plenary session is an optional pick (e.g. an off-site
+   * social) and is excluded from the first-visit auto-enrollment default —
+   * everyone is assumed to attend whole-audience plenary sessions unless
+   * marked optional.
+   */
+  optional?: boolean
   item: ScheduleItem
 }
 

@@ -13,11 +13,13 @@ export interface ResolvedSession extends SessionInfo {
 }
 
 /**
- * Flattens every workshop-room session and virtual-track session across the
- * schedule, with timing/location resolved. Plenary items (registration,
- * keynotes, panels, etc.) are intentionally excluded — they're mandatory
- * whole-audience items, not optional picks, so they have no details page
- * and can't be added to "My Schedule".
+ * Flattens every plenary session, workshop-room session, and virtual-track
+ * session across the schedule, with timing/location resolved. Plenary
+ * sessions (keynotes, panels, etc.) have no inline select toggle on the
+ * schedule grid itself (see `PlenaryCard`), but they do get a details page
+ * and can be added to / removed from "My Schedule" there — whole-audience
+ * ones are auto-enrolled by default on a user's first visit (see
+ * `getDefaultSelectedIds`).
  */
 export function getAllSessions(schedule: Schedule): Array<ResolvedSession> {
   const roomName = (id: string) => schedule.rooms.find((room) => room.id === id)?.name ?? id
@@ -25,7 +27,20 @@ export function getAllSessions(schedule: Schedule): Array<ResolvedSession> {
   const sessions: Array<ResolvedSession> = []
 
   for (const block of schedule.blocks) {
-    if (block.kind !== 'workshop') continue
+    if (block.kind === 'plenary') {
+      if (block.item.kind !== 'session') continue
+      const start = block.startTime
+      const end = addMinutesToTime(start, block.item.durationMinutes)
+      sessions.push({
+        ...block.item,
+        start,
+        end,
+        timeRange: `${formatTime(start)}\u2013${formatTime(end)}`,
+        blockLabel: block.label,
+        location: block.location ?? '',
+      })
+      continue
+    }
 
     for (const roomTrack of block.rooms) {
       const timedItems = withTiming(roomTrack.items, block.startTime)
@@ -60,6 +75,22 @@ export function getAllSessions(schedule: Schedule): Array<ResolvedSession> {
 /** Finds a single session by id across all blocks, or undefined if no session matches. */
 export function findSessionById(schedule: Schedule, id: string): ResolvedSession | undefined {
   return getAllSessions(schedule).find((session) => session.id === id)
+}
+
+/**
+ * Ids of the whole-audience plenary sessions (keynote, welcome, panel,
+ * closing, etc.) that should be auto-enrolled into "My Schedule" by
+ * default — they never conflict with anything and everyone attends them.
+ * Plenary sessions marked `optional` (e.g. an off-site social) are excluded.
+ */
+export function getDefaultSelectedIds(schedule: Schedule): Array<string> {
+  const ids: Array<string> = []
+  for (const block of schedule.blocks) {
+    if (block.kind === 'plenary' && block.item.kind === 'session' && !block.optional) {
+      ids.push(block.item.id)
+    }
+  }
+  return ids
 }
 
 /** True if two sessions' [start, end) time ranges overlap. Assumes same-day "HH:MM" strings. */

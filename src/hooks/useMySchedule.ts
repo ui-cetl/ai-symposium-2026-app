@@ -1,19 +1,25 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import type { Schedule } from '../data/schedule/types'
-import { findConflicts, getAllSessions } from '../data/schedule/sessions'
+import { findConflicts, getAllSessions, getDefaultSelectedIds } from '../data/schedule/sessions'
 
 const STORAGE_KEY = 'ai-symposium-2026:my-schedule'
 
-function loadIds(): Set<string> {
+function loadIds(schedule: Schedule): Set<string> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return new Set()
+    if (raw === null) {
+      // First visit (no saved selection yet) — auto-enroll in the
+      // whole-audience plenary sessions (keynote, closing, etc.), since
+      // they never conflict with anything and everyone attends them.
+      return new Set(getDefaultSelectedIds(schedule))
+    }
     const parsed: unknown = JSON.parse(raw)
     return Array.isArray(parsed) ? new Set(parsed.filter((id) => typeof id === 'string')) : new Set()
   } catch {
-    // localStorage unavailable (private mode, etc.) — selection just won't persist
-    return new Set()
+    // localStorage unavailable (private mode, etc.) — falls back to the
+    // same default for this page load, though it won't persist
+    return new Set(getDefaultSelectedIds(schedule))
   }
 }
 
@@ -31,7 +37,7 @@ function saveIds(ids: Set<string>) {
  * conflicting pick(s) first (last click wins).
  */
 export function useMySchedule(schedule: Schedule) {
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(loadIds)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(() => loadIds(schedule))
 
   useEffect(() => {
     saveIds(selectedIds)

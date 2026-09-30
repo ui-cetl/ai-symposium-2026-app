@@ -9,8 +9,10 @@ import styles from './PlenaryCard.module.css'
 /**
  * Renders a plenary block's single whole-audience item (no concurrent
  * rooms). Breaks delegate to the existing `BreakCard`; sessions render a
- * simple, non-interactive card — plenary items aren't selectable into "My
- * Schedule" (they're mandatory, not optional picks).
+ * simple, non-interactive card — no inline select toggle here, but
+ * whole-audience plenary sessions (keynote, panels, etc.) are auto-enrolled
+ * into "My Schedule" by default and can be added/removed from their
+ * details page (see `getDefaultSelectedIds`).
  */
 export function PlenaryCard({ block, style }: Readonly<{ block: PlenaryBlock; style?: CSSProperties }>) {
   const timeRange = formatTimeRange(block.startTime, block.durationMinutes)
