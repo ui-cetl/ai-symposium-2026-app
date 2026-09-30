@@ -12,13 +12,21 @@ export interface ResolvedSession extends SessionInfo {
   location: string
 }
 
-/** Flattens every on-site and remote session across all blocks, with timing/location resolved. */
+/**
+ * Flattens every workshop-room session and virtual-track session across the
+ * schedule, with timing/location resolved. Plenary items (registration,
+ * keynotes, panels, etc.) are intentionally excluded — they're mandatory
+ * whole-audience items, not optional picks, so they have no details page
+ * and can't be added to "My Schedule".
+ */
 export function getAllSessions(schedule: Schedule): Array<ResolvedSession> {
   const roomName = (id: string) => schedule.rooms.find((room) => room.id === id)?.name ?? id
 
   const sessions: Array<ResolvedSession> = []
 
   for (const block of schedule.blocks) {
+    if (block.kind !== 'workshop') continue
+
     for (const roomTrack of block.rooms) {
       const timedItems = withTiming(roomTrack.items, block.startTime)
       for (const { item, start, end } of timedItems) {
@@ -33,17 +41,17 @@ export function getAllSessions(schedule: Schedule): Array<ResolvedSession> {
         })
       }
     }
+  }
 
-    for (const session of block.remote) {
-      sessions.push({
-        ...session,
-        start: block.startTime,
-        end: addMinutesToTime(block.startTime, session.durationMinutes),
-        timeRange: formatTimeRange(block.startTime, session.durationMinutes),
-        blockLabel: block.label,
-        location: 'Remote',
-      })
-    }
+  for (const session of schedule.virtualTrack) {
+    sessions.push({
+      ...session,
+      start: session.startTime,
+      end: addMinutesToTime(session.startTime, session.durationMinutes),
+      timeRange: formatTimeRange(session.startTime, session.durationMinutes),
+      blockLabel: 'Virtual Sessions',
+      location: 'Remote',
+    })
   }
 
   return sessions

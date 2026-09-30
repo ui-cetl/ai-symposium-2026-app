@@ -1,139 +1,16 @@
-# Block 2: Room A splits into two 35-minute sessions with a 5-minute break;
-# Room B runs one full-length session; Room C runs one 35-minute session
-# followed by a 40-minute break.
+# Block 2: Opening keynote — whole-audience, no concurrent rooms.
+kind: plenary
 id: block-2
-label: Block 2 · Midday
-startTime: '10:30'
-durationMinutes: 75
+label: Keynote
+startTime: '09:15'
+durationMinutes: 45
+location: International Ballroom North
 
-rooms:
-  - room: room-a
-    items:
-      - kind: session
-        id: block-2-room-a-1
-        title: Retrieval-Augmented Generation in Practice
-        speakers: [Ada Lovelace]
-        track: Engineering
-        durationMinutes: 35
-        abstract: >
-          Lessons learned wiring retrieval pipelines into production LLM
-          applications.
-        description: >
-          Retrieval-augmented generation looks simple in a tutorial and gets
-          complicated fast in production: stale indexes, chunking strategies
-          that break on real documents, and retrieval results that quietly
-          drift out of relevance as a corpus grows. This talk walks through
-          the operational lessons from running RAG pipelines at scale,
-          including index refresh strategies, hybrid retrieval, and how to
-          evaluate retrieval quality independently of generation quality.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/rag-in-practice.pdf
-        artifacts:
-          - label: Pipeline reference implementation
-            url: https://example.org/symposium/artifacts/rag-pipeline-reference
-      - kind: break
-        durationMinutes: 5
-        label: Room changeover
-      - kind: session
-        id: block-2-room-a-2
-        title: Evaluating LLM Output Quality
-        speakers: [Alan Turing]
-        track: Research
-        durationMinutes: 35
-        abstract: >
-          Approaches to measuring correctness, helpfulness, and safety in
-          generated text.
-        description: >
-          Automated metrics rarely tell the whole story about whether a
-          model's output is actually good. This talk compares reference-based
-          metrics, model-graded evaluation, and human review pipelines, with
-          a focus on catching regressions in correctness, helpfulness, and
-          safety before they reach users, and on building an evaluation
-          suite that scales with a growing set of use cases.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/evaluating-llm-output-quality.pdf
-        artifacts:
-          - label: Evaluation harness
-            url: https://example.org/symposium/artifacts/llm-eval-harness
-
-  - room: room-b
-    items:
-      - kind: session
-        id: block-2-room-b-1
-        title: Building Reliable Agent Workflows
-        speakers: [Grace Hopper]
-        track: Engineering
-        durationMinutes: 75
-        abstract: >
-          Patterns for keeping multi-step agent workflows observable,
-          testable, and recoverable when a step fails.
-        description: >
-          Multi-step agent workflows fail in ways that are hard to reproduce
-          and even harder to test for ahead of time. This session presents a
-          set of patterns for making agent workflows observable step by
-          step, injecting deterministic test fixtures around
-          non-deterministic model calls, and designing recovery paths so a
-          single failed step does not require restarting an entire workflow
-          from scratch.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/reliable-agent-workflows.pdf
-          - label: Recording
-            url: https://example.org/symposium/recordings/reliable-agent-workflows.mp4
-        artifacts:
-          - label: Workshop handout
-            url: https://example.org/symposium/handouts/agent-workflows.pdf
-
-  - room: room-c
-    items:
-      - kind: session
-        id: block-2-room-c-1
-        title: Accessibility in AI-Generated Interfaces
-        speakers: [Margaret Hamilton]
-        track: Design
-        durationMinutes: 35
-        abstract: >
-          Practical checks for keeping AI-assisted UI generation accessible
-          by default.
-        description: >
-          AI-assisted UI generation tools are fast, but they do not
-          automatically produce accessible markup. This talk walks through a
-          practical checklist for catching missing labels, poor color
-          contrast, and broken keyboard navigation in generated interfaces,
-          and shows how to fold automated accessibility checks directly into
-          a generation pipeline rather than relying on manual review alone.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/accessible-ai-interfaces.pdf
-        artifacts:
-          - label: Accessibility checklist
-            url: https://example.org/symposium/artifacts/ai-interface-a11y-checklist
-      - kind: break
-        durationMinutes: 40
-        label: Room reset
-
-remote:
-  - id: block-2-remote-1
-    title: Governance for AI Procurement
-    speakers: [John McCarthy]
-    track: Ethics
-    durationMinutes: 75
-    joinInfo: Zoom link emailed to registered remote attendees
-    abstract: >
-      What to ask vendors before buying an AI system, and how to build
-      procurement processes that hold up over time.
-    description: >
-      Procurement teams are increasingly asked to evaluate AI vendors
-      without a shared vocabulary for what "safe" or "compliant" actually
-      means. This talk proposes a practical vendor questionnaire covering
-      data handling, model provenance, and ongoing monitoring commitments,
-      along with contract language that keeps an organization protected as
-      a vendor's underlying models change over time.
-    resources:
-      - label: Slides
-        url: https://example.org/symposium/slides/ai-procurement-governance.pdf
-    artifacts:
-      - label: Vendor questionnaire template
-        url: https://example.org/symposium/artifacts/ai-procurement-questionnaire
+item:
+  kind: session
+  id: block-2-item
+  title: Keynote Speaker
+  speakers: [Joel Gladd]
+  track: Keynote
+  durationMinutes: 45
+  abstract: Abstract coming soon.

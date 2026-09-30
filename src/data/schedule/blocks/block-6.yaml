@@ -1,0 +1,69 @@
+# Block 6: Workshop Tracks — Session 2. Same track→room assignment as
+# Session 1 (room-1 = Track 1, room-2 = Track 2, room-3 = Track 3,
+# room-4 = Track 4) so each track stays in one consistent room across the
+# whole day. No overflow room needed this session — Track 3's two talks
+# run sequentially in room-3 (Divide and Delegate, then Create
+# Professional Presentations).
+kind: workshop
+id: block-6
+label: Workshop Tracks — Session 2
+startTime: '11:45'
+durationMinutes: 75
+
+rooms:
+  - room: room-1
+    items:
+      - kind: session
+        id: block-6-room-1-1
+        title: 'AI Underdogs: Not Everything is a Neural Network'
+        speakers: [Marz Everett]
+        track: AI in Research
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+      - kind: break
+        durationMinutes: 40
+        label: Room reset
+
+  - room: room-2
+    items:
+      - kind: break
+        durationMinutes: 40
+        label: Room reset
+      - kind: session
+        id: block-6-room-2-1
+        title: 'Partnering on AI Literacy: Library Resources for Faculty'
+        speakers: [Pamela Martin]
+        track: AI in Teaching
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+
+  - room: room-3
+    items:
+      - kind: session
+        id: block-6-room-3-1
+        title: 'Divide and Delegate: A Practical Introduction to AI Subagents'
+        speakers: [Nate Summers]
+        track: AI 101 How-To's
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+      - kind: break
+        durationMinutes: 5
+        label: Room changeover
+      - kind: session
+        id: block-6-room-3-2
+        title: 'Create Professional Presentations in Minutes: A Hands-On Workshop with Google NotebookLM'
+        speakers: [Jason Thomas]
+        track: AI 101 How-To's
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+
+  - room: room-4
+    items:
+      - kind: session
+        id: block-6-room-4-1
+        title: Narratives that have, and will, shape both us and the machines
+        speakers: [Bert Baumgaertner]
+        track: AI Ethics and Future
+        durationMinutes: 75
+        abstract: Abstract coming soon.
+

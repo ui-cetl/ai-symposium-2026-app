@@ -1,0 +1,67 @@
+# Track 5: Virtual Sessions — runs on its own independent cadence over
+# Zoom, not tied to any on-site block's start/end times. Each entry has its
+# own explicit startTime. The source draft listed "Ethical Leadership
+# Decision Lab" twice with identical time/speaker/title — treated as a
+# copy-paste duplicate and included only once here.
+- id: virtual-1
+  title: 'Ethical Leadership Decision Lab: Navigating AI, Privacy, and Human Judgment'
+  speakers: [Juhee Kim]
+  track: Virtual Sessions
+  startTime: '10:15'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-2
+  title: 'ASTRA: Automating Supercomputer Research Workflows'
+  speakers: [David Vartanyan]
+  track: Virtual Sessions
+  startTime: '10:50'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-3
+  title: 'Machines That Learn: Demystifying How AI Works Under the Hood'
+  speakers: [Luke Sheneman]
+  track: Virtual Sessions
+  startTime: '11:25'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-4
+  title: Transparent Expectations at the Speed of AI
+  speakers: [Mary Helen Hoque]
+  track: Virtual Sessions
+  startTime: '12:00'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-5
+  title: Using AI to Reduce Data Processing Time for Scientific Visualization and Simulation
+  speakers: [Jean-Marc Gauthier]
+  track: Virtual Sessions
+  startTime: '12:35'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-6
+  title: 'Playing Out of Position: Becoming an Adaptive Expert with AI'
+  speakers: [Jason M. Johnston]
+  track: Virtual Sessions
+  startTime: '14:30'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.
+
+- id: virtual-7
+  title: Collaborating with AI to Respond to Student Writing
+  speakers: [Emma Catherine Perry]
+  track: Virtual Sessions
+  startTime: '15:15'
+  durationMinutes: 30
+  joinInfo: Zoom link emailed to registered remote attendees (TBD)
+  abstract: Abstract coming soon.

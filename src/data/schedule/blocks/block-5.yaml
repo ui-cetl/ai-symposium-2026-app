@@ -1,8 +1,8 @@
-# Block 3: Break & transition to workshop tracks — whole-audience, no concurrent rooms.
+# Block 5: Break & transition to workshop tracks — whole-audience, no concurrent rooms.
 kind: plenary
-id: block-3
+id: block-5
 label: Break & Transition to Tracks
-startTime: '10:00'
+startTime: '11:30'
 durationMinutes: 15
 
 item:

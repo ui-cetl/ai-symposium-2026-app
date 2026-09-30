@@ -1,87 +1,12 @@
-# Block 0: Opening keynote — three back-to-back 25-minute keynote talks in
-# the main room (Ballroom A), with no parallel tracks or remote-only
-# sessions. Ends at 09:00, exactly when Block 1's rooms begin using
-# Ballroom A again, so there's no double-booking of the room.
+# Block 0: Registration — whole-audience, no concurrent rooms.
+kind: plenary
 id: block-0
-label: Keynote · Opening
-startTime: '07:45'
-durationMinutes: 75
+label: Registration
+startTime: '08:30'
+durationMinutes: 30
+location: International Ballroom North
 
-rooms:
-  - room: room-a
-    items:
-      - kind: session
-        id: block-0-room-a-1
-        title: 'Opening Keynote: Reimagining Human-AI Partnership'
-        speakers: [Margaret Hamilton]
-        track: Keynote
-        durationMinutes: 25
-        abstract: >
-          A welcome address setting the tone for the day: what genuine
-          partnership between people and AI systems should look like, and
-          why the symposium's agenda is built around that question.
-        description: >
-          Every talk today touches, in some way, on the boundary between
-          human judgment and machine assistance. This opening keynote lays
-          out a shared vocabulary for that boundary, drawing on decades of
-          hard-won lessons from safety-critical software to argue that the
-          most durable AI systems are the ones designed for partnership
-          rather than replacement. We'll close with a preview of the themes
-          running through the day's sessions.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/opening-keynote.pdf
-        artifacts:
-          - label: Speaker notes
-            url: https://example.org/symposium/artifacts/opening-keynote-notes
-
-      - kind: session
-        id: block-0-room-a-2
-        title: 'Keynote: Foundations of Trustworthy AI'
-        speakers: [John McCarthy]
-        track: Keynote
-        durationMinutes: 25
-        abstract: >
-          What "trustworthy" should actually mean for an AI system, and
-          why most current definitions fall short in practice.
-        description: >
-          Trustworthy AI is invoked constantly and defined rarely. This
-          keynote proposes a concrete, testable definition built around
-          three properties — predictability, correctability, and
-          transparency of failure — and walks through case studies of
-          systems that got each one wrong. The goal is a shared bar that
-          today's other sessions on ethics, guardrails, and governance can
-          be measured against.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/trustworthy-ai-foundations.pdf
-        artifacts:
-          - label: Trustworthy AI checklist
-            url: https://example.org/symposium/artifacts/trustworthy-ai-checklist
-
-      - kind: session
-        id: block-0-room-a-3
-        title: 'Keynote: What a Decade of AI Research Got Wrong'
-        speakers: [Grace Hopper]
-        track: Keynote
-        durationMinutes: 25
-        abstract: >
-          A candid retrospective on predictions the field confidently made
-          ten years ago that did not hold up, and what that means for
-          today's predictions.
-        description: >
-          Closing the opening keynote block with some humility: a look
-          back at a decade of confident predictions about AI capabilities,
-          timelines, and risks that did not survive contact with reality.
-          Rather than a victory lap or a takedown, this talk asks what
-          made those predictions fail, and offers a practical framework
-          for holding today's predictions — including the day's own — to
-          a higher standard of evidence.
-        resources:
-          - label: Slides
-            url: https://example.org/symposium/slides/decade-of-ai-research.pdf
-        artifacts:
-          - label: Prediction retrospective dataset
-            url: https://example.org/symposium/artifacts/ai-predictions-retrospective
-
-remote: []
+item:
+  kind: break
+  durationMinutes: 30
+  label: Registration — coffee and refreshments provided

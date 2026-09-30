@@ -1,0 +1,16 @@
+# Block 12: Closing Plenary — whole-audience, no concurrent rooms.
+kind: plenary
+id: block-12
+label: Closing Plenary
+startTime: '16:00'
+durationMinutes: 30
+location: International Ballroom North
+
+item:
+  kind: session
+  id: block-12-item
+  title: 'Closing Plenary: Ben Hunter, Dean Library & Chief Data Governance'
+  speakers: [Ben Hunter]
+  track: Plenary
+  durationMinutes: 30
+  abstract: Dessert bar provided.

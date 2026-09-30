@@ -1,0 +1,11 @@
+# Block 11: Break and reconvene — whole-audience, no concurrent rooms.
+kind: plenary
+id: block-11
+label: Break and Reconvene
+startTime: '15:45'
+durationMinutes: 15
+
+item:
+  kind: break
+  durationMinutes: 15
+  label: Break and reconvene

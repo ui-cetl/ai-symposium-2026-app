@@ -1,0 +1,18 @@
+# Block 13: No-Host Social — off-site, whole-audience, no concurrent rooms.
+# Source draft gives only a start time (5:00 pm), no stated end time —
+# durationMinutes (120) is an estimate, not from the source document.
+kind: plenary
+id: block-13
+label: No-Host Social
+startTime: '17:00'
+durationMinutes: 120
+location: Hunga Dunga, 333 N Jackson St, Moscow, ID
+
+item:
+  kind: session
+  id: block-13-item
+  title: No-Host Social at Hunga Dunga
+  speakers: []
+  track: Plenary
+  durationMinutes: 120
+  abstract: Abstract coming soon.

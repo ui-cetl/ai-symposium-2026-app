@@ -1,5 +1,5 @@
-import type { Block, Schedule, SessionInfo } from './types'
-import { addMinutesToTime, withTiming } from './timing'
+import type { Schedule, SessionInfo, WorkshopBlock } from './types'
+import { withTiming } from './timing'
 
 interface RawEntry {
   kind: 'session' | 'break'
@@ -8,7 +8,6 @@ interface RawEntry {
   location: string
   column: number
   session?: SessionInfo
-  joinInfo?: string
   durationMinutes: number
   label?: string
 }
@@ -23,7 +22,6 @@ export interface TimelineEntry {
   rowStart: number
   rowSpan: number
   session?: SessionInfo
-  joinInfo?: string
   durationMinutes: number
   label?: string
 }
@@ -34,13 +32,12 @@ export interface BlockTimeline {
 }
 
 /**
- * Lays a block's rooms + remote sessions out onto a shared CSS-Grid-ready
- * timeline: one column per room (plus one per remote session), and
- * row-spans derived from the block's distinct start times — so a single
- * long session in one room visually spans the same vertical space as
- * another room's shorter split sessions+break.
+ * Lays a workshop block's rooms out onto a shared CSS-Grid-ready timeline:
+ * one column per room, and row-spans derived from the block's distinct
+ * start times — so a single long session in one room visually spans the
+ * same vertical space as another room's shorter split sessions+break.
  */
-export function buildBlockTimeline(schedule: Schedule, block: Block): BlockTimeline {
+export function buildBlockTimeline(schedule: Schedule, block: WorkshopBlock): BlockTimeline {
   const roomName = (id: string) => schedule.rooms.find((room) => room.id === id)?.name ?? id
 
   const raw: Array<RawEntry> = []
@@ -60,20 +57,6 @@ export function buildBlockTimeline(schedule: Schedule, block: Block): BlockTimel
         label: item.kind === 'break' ? item.label : undefined,
       })
     }
-    column += 1
-  }
-
-  for (const session of block.remote) {
-    raw.push({
-      kind: 'session',
-      start: block.startTime,
-      end: addMinutesToTime(block.startTime, session.durationMinutes),
-      location: 'Remote',
-      column,
-      session,
-      joinInfo: session.joinInfo,
-      durationMinutes: session.durationMinutes,
-    })
     column += 1
   }
 

@@ -1,0 +1,62 @@
+# Block 10: Workshop Tracks — Session 3. Same track→room assignment as
+# Sessions 1/2 (room-1 = Track 1, room-2 = Track 2, room-3 = Track 3,
+# room-4 = Track 4) — no overflow rooms needed this session.
+kind: workshop
+id: block-10
+label: Workshop Tracks — Session 3
+startTime: '14:30'
+durationMinutes: 75
+
+rooms:
+  - room: room-1
+    items:
+      - kind: session
+        id: block-10-room-1-1
+        title: 'From Prompt to Silicon: Responsible Use of AI in Microelectronics Research and Chip Design'
+        speakers: [Zain Ul Abideen]
+        track: AI in Research
+        durationMinutes: 75
+        abstract: Abstract coming soon.
+
+  - room: room-2
+    items:
+      - kind: session
+        id: block-10-room-2-1
+        title: 'Good Cop, Bad Cop: Designing Effective AI Policies for Your Classroom and Department'
+        speakers: [Leah Hampton]
+        track: AI in Teaching
+        durationMinutes: 75
+        abstract: Abstract coming soon.
+
+  - room: room-3
+    items:
+      - kind: session
+        id: block-10-room-3-1
+        title: Vandal Chat
+        speakers: [Luke Sheneman]
+        track: AI 101 How-To's
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+      - kind: break
+        durationMinutes: 40
+        label: Room reset
+
+  - room: room-4
+    items:
+      - kind: session
+        id: block-10-room-4-1
+        title: The Student Perspective on AI
+        speakers: [Margie Pinnell, Blaine Eckles]
+        track: AI Ethics and Future
+        durationMinutes: 35
+        abstract: Abstract coming soon.
+      - kind: break
+        durationMinutes: 5
+        label: Room changeover
+      - kind: session
+        id: block-10-room-4-2
+        title: 'Student Voices on AI: A Data-Informed Facilitated Discussion'
+        speakers: [Kenneth Wallen]
+        track: AI Ethics and Future
+        durationMinutes: 35
+        abstract: Abstract coming soon.

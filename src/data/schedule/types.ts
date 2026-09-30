@@ -3,13 +3,21 @@
  *
  * Authoring contract for YAML files under `src/data/schedule/`:
  * - `rooms.yaml` is a single list of `Room` objects.
- * - `blocks/*.yaml` — one file per time block — each parses to a `Block`.
+ * - `blocks/*.yaml` — one file per time block — each parses to a `Block`
+ *   (a discriminated union on `kind`, see below).
+ * - `virtual.yaml` is a single flat list of `VirtualSession` objects, each
+ *   with its own explicit `startTime` — the virtual track runs on its own
+ *   independent cadence, not tied to any on-site block's timing.
  *
- * A block is a single physical time slot (e.g. 75 minutes). Within that
- * slot, each room runs its own independent sequence of `items` (sessions
- * and/or breaks) whose `durationMinutes` should sum to the block's
- * `durationMinutes`. This lets one room hold a single long session while
- * another splits the same slot into two shorter sessions with a break.
+ * A `WorkshopBlock` is a single physical time slot (e.g. 75 minutes) split
+ * across concurrent rooms. Within that slot, each room runs its own
+ * independent sequence of `items` (sessions and/or breaks) whose
+ * `durationMinutes` should sum to the block's `durationMinutes`. This lets
+ * one room hold a single long session while another splits the same slot
+ * into two shorter sessions with a break.
+ *
+ * A `PlenaryBlock` is a single whole-audience item (a session or a break)
+ * with no concurrent rooms — e.g. registration, a keynote, or a panel.
  */
 
 export interface ResourceLink {
@@ -41,22 +49,38 @@ export interface RoomTrack {
   items: Array<ScheduleItem>
 }
 
-/** A remote-only session, running alongside the on-site rooms in a block. */
-export interface RemoteSession extends SessionInfo {
+/** A remote-only session in the independent virtual track, with its own explicit start time. */
+export interface VirtualSession extends SessionInfo {
   durationMinutes: number
+  /** 24-hour local time, e.g. "10:15". Independent of any on-site block. */
+  startTime: string
   joinInfo?: string
 }
 
-export interface Block {
+/** A single whole-audience time slot with no concurrent rooms (e.g. registration, a keynote, a panel). */
+export interface PlenaryBlock {
+  kind: 'plenary'
+  id: string
+  label: string
+  /** 24-hour local time, e.g. "09:00". */
+  startTime: string
+  durationMinutes: number
+  location?: string
+  item: ScheduleItem
+}
+
+/** A time slot split across concurrent rooms, each running its own sequential items. */
+export interface WorkshopBlock {
+  kind: 'workshop'
   id: string
   label: string
   /** 24-hour local time, e.g. "09:00". */
   startTime: string
   durationMinutes: number
   rooms: Array<RoomTrack>
-  /** Up to 3 remote sessions running alongside the on-site rooms. */
-  remote: Array<RemoteSession>
 }
+
+export type Block = PlenaryBlock | WorkshopBlock
 
 export interface Room {
   id: string
@@ -67,4 +91,6 @@ export interface Room {
 export interface Schedule {
   rooms: Array<Room>
   blocks: Array<Block>
+  /** The independent virtual/remote track — its own cadence, not tied to on-site block timing. */
+  virtualTrack: Array<VirtualSession>
 }

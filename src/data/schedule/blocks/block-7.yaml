@@ -1,0 +1,12 @@
+# Block 7: Lunch transition — whole-audience, no concurrent rooms. Lunch provided.
+kind: plenary
+id: block-7
+label: Lunch Transition
+startTime: '13:00'
+durationMinutes: 15
+location: International Ballroom North
+
+item:
+  kind: break
+  durationMinutes: 15
+  label: Lunch Transition — lunch provided
