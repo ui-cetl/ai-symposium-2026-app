@@ -39,7 +39,7 @@ export function SessionCard({
           <p className={styles.time}>
             {timeRange} · {location}
           </p>
-          <h4 className={styles.title}>{title}</h4>
+          <h3 className={styles.title}>{title}</h3>
           <p className={styles.speakers}>{speakers.join(', ')}</p>
           {track && <TrackBadge track={track} />}
         </summary>

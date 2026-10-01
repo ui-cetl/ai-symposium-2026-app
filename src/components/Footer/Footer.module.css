@@ -21,6 +21,6 @@
 
 .meta {
   font-size: var(--step--1);
-  color: var(--brand-silver);
+  color: var(--color-footer-text-muted);
   margin: 0;
 }

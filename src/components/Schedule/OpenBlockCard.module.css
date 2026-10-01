@@ -23,6 +23,6 @@
 }
 
 .link {
-  color: var(--color-accent-ink);
+  color: var(--color-link);
   font-weight: 600;
 }

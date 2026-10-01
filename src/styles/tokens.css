@@ -57,6 +57,10 @@
   --color-header-bg: var(--brand-white);
   --color-footer-bg: var(--brand-steel);
   --color-footer-text: #ededed;
+  /* --brand-silver (#808080) fails WCAG AA against both footer backgrounds
+     below (~3.3:1 light, ~4.5:1 dark) — use this instead for muted footer
+     text; passes AA (>=4.5:1) against both --color-footer-bg values. */
+  --color-footer-text-muted: #b3b3b3;
 
   /* Typography */
   --font-heading: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
@@ -90,6 +94,14 @@
 
   --max-content-width: 72rem;
   --max-prose-width: 42rem;
+
+  /* TrackBadge text color is `color-mix(in srgb, var(--badge-color) <pct>,
+     <mix-color>)` — the raw track accent (used alone) fails WCAG AA against
+     the badge's own tinted background for several accents (as low as
+     ~3.8:1 on light bg, ~1.2:1 on dark bg). Blending toward black (light
+     theme) / white (dark theme) restores >=4.5:1 for all 8 accents. */
+  --badge-text-mix-color: black;
+  --badge-text-mix-pct: 70%;
 }
 
 [data-theme='dark'] {
@@ -111,4 +123,7 @@
 
   --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-m: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+  --badge-text-mix-color: white;
+  --badge-text-mix-pct: 50%;
 }
