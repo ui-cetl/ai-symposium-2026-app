@@ -38,6 +38,21 @@ To build this application for production:
 pnpm build
 ```
 
+## Deploying to GitHub Pages
+
+This repo is configured to deploy to `https://ui-cetl.github.io/ai-symposium-2026-app/`.
+
+Pushing to `main` triggers [.github/workflows/deploy-gh-pages.yml](.github/workflows/deploy-gh-pages.yml), which builds the app and publishes it via GitHub Pages. The first time this runs, enable Pages for the repo under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+To build the GitHub Pages bundle locally:
+
+```bash
+pnpm run build:gh-pages
+pnpm run preview:gh-pages
+```
+
+`build:gh-pages` builds with `base: '/ai-symposium-2026-app/'` (see `vite.config.ts`) so assets resolve correctly under the repo sub-path, and copies `dist/index.html` to `dist/404.html` so GitHub Pages serves the SPA shell for deep links (e.g. `/schedule`) instead of a real 404.
+
 ## Styling
 
 This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.

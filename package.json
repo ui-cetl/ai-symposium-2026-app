@@ -9,7 +9,10 @@
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:gh-pages": "vite build --mode gh-pages",
+    "postbuild:gh-pages": "node scripts/copy-spa-fallback.mjs",
+    "preview:gh-pages": "vite preview --mode gh-pages"
   },
   "dependencies": {
     "@tanstack/react-devtools": "latest",
