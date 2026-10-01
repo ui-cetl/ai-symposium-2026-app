@@ -32,35 +32,44 @@ export function SessionCard({
   onToggleSelect,
   style,
 }: Readonly<SessionCardProps>) {
+  const hasExpandableContent = Boolean(abstract || joinInfo)
+
   return (
     <li className={isSelected ? `${styles.card} ${styles.cardSelected}` : styles.card} style={style}>
-      <details className={styles.details}>
-        <summary className={styles.summary}>
-          <p className={styles.time}>
-            {timeRange} · {location}
-          </p>
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.speakers}>{speakers.join(', ')}</p>
-          {track && <TrackBadge track={track} />}
-        </summary>
-        {abstract && <p className={styles.abstract}>{abstract}</p>}
-        {joinInfo && <p className={styles.joinInfo}>{joinInfo}</p>}
-        <div className={styles.actions}>
-          {onToggleSelect && (
-            <button
-              type="button"
-              className={isSelected ? `${styles.selectButton} ${styles.selectButtonActive}` : styles.selectButton}
-              aria-pressed={isSelected}
-              onClick={onToggleSelect}
-            >
-              {isSelected ? '✓ In my schedule' : '+ Add to my schedule'}
-            </button>
-          )}
-          <Link to="/sessions/$sessionId" params={{ sessionId: id }} className={styles.viewDetails}>
-            View details →
-          </Link>
-        </div>
-      </details>
+      <div className={styles.preview}>
+        <p className={styles.time}>
+          {timeRange} · {location}
+        </p>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.speakers}>{speakers.join(', ')}</p>
+        {track && <TrackBadge track={track} />}
+      </div>
+
+      {hasExpandableContent && (
+        <details className={styles.details}>
+          <summary className={styles.summary} aria-label={`More info about ${title}`}>
+            More info
+          </summary>
+          {abstract && <p className={styles.abstract}>{abstract}</p>}
+          {joinInfo && <p className={styles.joinInfo}>{joinInfo}</p>}
+        </details>
+      )}
+
+      <div className={styles.actions}>
+        {onToggleSelect && (
+          <button
+            type="button"
+            className={isSelected ? `${styles.selectButton} ${styles.selectButtonActive}` : styles.selectButton}
+            aria-pressed={isSelected}
+            onClick={onToggleSelect}
+          >
+            {isSelected ? '✓ In my schedule' : '+ Add to my schedule'}
+          </button>
+        )}
+        <Link to="/sessions/$sessionId" params={{ sessionId: id }} className={styles.viewDetails}>
+          View details →
+        </Link>
+      </div>
     </li>
   )
 }
