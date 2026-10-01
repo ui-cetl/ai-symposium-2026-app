@@ -2,6 +2,7 @@
   "name": "ai-symposium-2026-app",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@12.8.1",
   "imports": {
     "#/*": "./src/*"
   },
