@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-s) var(--space-m);
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+.time {
+  margin: 0;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+}
+
+.label {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.link {
+  color: var(--color-accent-ink);
+  font-weight: 600;
+}

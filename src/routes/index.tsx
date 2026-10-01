@@ -22,7 +22,7 @@ function Home() {
         </p>
       </section>
 
-      <MySchedule sessions={selectedSessions} />
+      <MySchedule schedule={schedule} sessions={selectedSessions} />
 
       <div className={styles.notices}>
         <p>On-site at the Pitman Center, or join remotely &mdash; no login required.</p>
