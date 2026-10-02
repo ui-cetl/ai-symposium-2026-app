@@ -1,18 +1,91 @@
 .card {
   display: flex;
   flex-direction: column;
-  padding: var(--space-m);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-m);
-  background: var(--color-surface-raised);
-  box-shadow: var(--shadow-s);
+  padding: var(--space-m) 0;
+  border-top: 1px solid var(--color-border);
   height: 100%;
 }
 
 .cardSelected {
-  border-color: var(--color-accent);
-  border-width: 2px;
-  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface-raised));
+  border-top-color: var(--color-accent);
+}
+
+/* Bolder "elevated" presentation — opt-in via the `elevated` prop, used on
+   Home (Up Next, My Schedule) where a more eye-catching treatment reads
+   better than the flat hairline rows used on the full Schedule page.
+   Big rounded corners + soft layered shadow instead of a hairline border.
+   Always dark with gold/white text — independent of the site's light/dark
+   toggle, same as the hero — gold-on-near-black runs ~8:1 contrast, well
+   past WCAG AA, which is why this reads better for accessibility than the
+   previous light card with thin gold accents. Every text color below is
+   hardcoded rather than pulled from the light/dark theme tokens, since
+   those tokens flip with the site theme and would go invisible against a
+   card that's always dark. */
+.cardElevated {
+  padding: var(--space-l);
+  border: none;
+  border-top: 6px solid var(--color-accent);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--color-accent) 7%, #1a1a1a);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 10px 28px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cardElevated:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 28px 48px -16px color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+.cardElevated.cardSelected {
+  box-shadow: 0 0 0 2px var(--color-accent), 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 10px 28px -12px rgba(0, 0, 0, 0.5);
+}
+
+.cardElevated .title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-accent);
+}
+
+.cardElevated .time,
+.cardElevated .speakers,
+.cardElevated .abstract,
+.cardElevated .joinInfo,
+.cardElevated .summary::after {
+  color: #d9d9d4;
+}
+
+.cardElevated .summary {
+  color: #fff;
+}
+
+.cardElevated .viewDetails {
+  color: var(--color-accent);
+}
+
+.cardElevated .selectButton {
+  color: #fff;
+}
+
+.cardElevated .selectButton:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.cardElevated .selectButtonActive svg path {
+  stroke: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardElevated {
+    transition: none;
+  }
+
+  .cardElevated:hover {
+    transform: none;
+  }
 }
 
 .details {
@@ -60,14 +133,24 @@
 
 .time {
   margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: var(--step--1);
   color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
+}
+
+/* Only the time range itself must stay on one line ("9:00 AM" shouldn't
+   break between the number and AM/PM) — the surrounding paragraph (which
+   also has " · <location>") needs to wrap freely, or long locations on
+   narrow phones push the whole card wider than the viewport. */
+.timeRange {
   white-space: nowrap;
 }
 
 .title {
   margin: 0;
+  font-weight: 450;
   font-size: var(--step-1);
 }
 
@@ -97,6 +180,24 @@
   min-height: 44px;
   display: flex;
   align-items: center;
+  gap: var(--space-2xs);
+}
+
+.arrowIcon {
+  width: 16px;
+  height: 10px;
+  color: var(--color-accent);
+  transition: transform 0.2s ease;
+}
+
+.viewDetails:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewDetails:hover .arrowIcon {
+    transform: none;
+  }
 }
 
 .actions {
@@ -108,23 +209,47 @@
 }
 
 .selectButton {
-  font: inherit;
-  font-size: var(--step--1);
-  font-weight: 600;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
   color: var(--color-text);
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-m);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
   cursor: pointer;
-  padding-inline: var(--space-s);
-  min-height: 44px;
-  display: flex;
-  align-items: center;
+  transition: border-color 0.2s;
 }
 
-.selectButtonActive {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+.selectButton:hover {
+  border-color: var(--color-border);
+}
+
+.selectButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+.selectButton svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  transition: fill 0.2s;
+}
+
+.selectButtonActive svg path {
+  fill: var(--color-accent);
+  stroke: var(--color-text);
+}
+
+.selectLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 

@@ -1,7 +1,4 @@
-# Block 8: Provost Remarks & Panel Discussion — whole-audience, no concurrent
-# rooms. Source draft's guest-panel list is cut off after "Nate Summers &" —
-# only the one named panelist is captured here; update once the full panel
-# roster is confirmed.
+# Block 8: Provost Remarks & Panel Discussion — whole-audience, no concurrent rooms.
 kind: plenary
 id: block-8
 label: Provost Remarks & Panel Discussion
@@ -13,7 +10,7 @@ item:
   kind: session
   id: block-8-item
   title: Provost Remarks & Panel Discussion
-  speakers: [Brook Blevins, Nate Summers]
+  speakers: [Brook Blevins, Nate Summers, Sarah Fogarty-Morrison]
   track: Plenary
   durationMinutes: 60
   abstract: Abstract coming soon.

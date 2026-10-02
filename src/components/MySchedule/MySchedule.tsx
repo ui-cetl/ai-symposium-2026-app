@@ -56,6 +56,7 @@ export function MySchedule({
                 abstract={entry.session.abstract}
                 joinInfo={entry.session.joinInfo}
                 isSelected={true}
+                elevated
               />
             ) : (
               <OpenBlockCard

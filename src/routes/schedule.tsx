@@ -9,7 +9,7 @@ export const Route = createFileRoute('/schedule')({ component: SchedulePage })
 function SchedulePage() {
   return (
     <div className={styles.page}>
-      <h1>Schedule</h1>
+      <h1 className={styles.title}>Schedule</h1>
       <p className={styles.lede}>
         Full session listing by time block, including on-site room assignments, plus an
         independent Virtual Sessions track running on its own schedule below.

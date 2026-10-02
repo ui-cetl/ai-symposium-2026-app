@@ -1,55 +1,114 @@
-/* Mobile/desktop breakpoint used throughout the schedule components: 640px. */
-
 .schedule {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
 }
 
-.block {
+.empty {
+  padding: var(--space-xl) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-m);
+  align-items: flex-start;
+  gap: var(--space-s);
 }
 
-.blockHeading {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: var(--space-m);
+.empty p {
   margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  color: var(--color-text);
 }
 
-.blockTime {
+.clearEmpty {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-s);
+  color: var(--color-text);
+  padding: var(--space-2xs) var(--space-s);
+}
+
+.clearEmpty:hover {
+  border-color: var(--color-text);
+}
+
+/* Flat, editorial "spine" list: a left-margin rail (hairline + dot per
+   slot) running alongside the whole schedule, replacing the old
+   concurrent-room CSS grid. Each <li> is one time slot; a slot can hold
+   several session rows when rooms run in parallel. */
+.spineList {
+  --spine-gutter: 1.75rem;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: var(--spine-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+.spineList::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--spine-gutter) / 2);
+  width: 1px;
+  background: var(--color-border);
+}
+
+.slot {
+  position: relative;
+}
+
+.slot::before {
+  content: '';
+  position: absolute;
+  top: 0.9rem;
+  left: calc(-1 * var(--spine-gutter) / 2 - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-text-muted);
+}
+
+@media (max-width: 640px) {
+  .spineList {
+    padding-left: 0;
+  }
+
+  .spineList::before,
+  .slot::before {
+    display: none;
+  }
+}
+
+.slotTime {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--step-2);
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.slotUntil {
+  display: block;
+  margin-top: var(--space-2xs);
   font-family: var(--font-body);
-  font-size: var(--step-0);
+  font-size: var(--step--1);
   font-weight: 400;
   color: var(--color-text-muted);
 }
 
-.timelineGrid {
+.slotEntries {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(var(--column-count, 1), minmax(17rem, 1fr));
-  gap: var(--space-m);
-  align-items: stretch;
-}
-
-.timelineGrid > li {
-  grid-column: var(--col, auto);
-  grid-row: var(--row-start, auto) / span var(--row-span, 1);
-}
-
-@media (max-width: 640px) {
-  .timelineGrid {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .timelineGrid > li {
-    grid-column: auto;
-    grid-row: auto;
-  }
+  display: flex;
+  flex-direction: column;
 }

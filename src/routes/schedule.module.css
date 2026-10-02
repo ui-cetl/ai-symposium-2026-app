@@ -4,6 +4,15 @@
   padding: var(--space-xl) var(--space-m);
 }
 
+.title::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: var(--color-accent);
+  margin-bottom: var(--space-s);
+}
+
 .lede {
   color: var(--color-text-muted);
   font-size: var(--step-1);

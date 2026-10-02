@@ -20,6 +20,13 @@ export function formatTimeRange(start: string, durationMinutes: number): string 
   return `${formatTime(start)}\u2013${formatTime(addMinutesToTime(start, durationMinutes))}`
 }
 
+/** Minutes between two same-day "HH:MM" times. */
+export function minutesBetween(start: string, end: string): number {
+  const [startHours, startMins] = start.split(':').map(Number)
+  const [endHours, endMins] = end.split(':').map(Number)
+  return endHours * 60 + endMins - (startHours * 60 + startMins)
+}
+
 export interface TimedItem<T> {
   item: T
   start: string

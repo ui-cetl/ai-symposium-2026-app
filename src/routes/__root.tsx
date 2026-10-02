@@ -5,10 +5,14 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import { Header } from '../components/Header/Header'
 import { Footer } from '../components/Footer/Footer'
+import { SessionDrawer } from '../components/SessionDrawer/SessionDrawer'
 
 import '../styles.css'
 
 export const Route = createRootRoute({
+  validateSearch: (search: Record<string, unknown>): { session?: string } => ({
+    session: typeof search.session === 'string' ? search.session : undefined,
+  }),
   head: () => ({
     meta: [
       {
@@ -17,7 +21,7 @@ export const Route = createRootRoute({
       {
         name: 'description',
         content:
-          'Schedule, announcements, and logistics for the CETL AI Symposium 2026, for remote and on-site attendees.',
+          'Thursday, October 29, 2026 at the Bruce Pitman Center — schedule, announcements, and logistics for the CETL AI Symposium 2026, for remote and on-site attendees.',
       },
     ],
   }),
@@ -25,16 +29,22 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
+  const { session } = Route.useSearch()
+
   return (
     <>
       <HeadContent />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <div className="app-shell">
         <Header />
-        <main className="app-main">
+        <main className="app-main" id="main">
           <Outlet />
         </main>
         <Footer />
       </div>
+      {session ? <SessionDrawer sessionId={session} /> : null}
       <TanStackDevtools
         config={{
           position: 'bottom-right',

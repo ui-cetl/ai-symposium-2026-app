@@ -11,3 +11,13 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+
+# Local-only reference material — not used by the built site.
+/Images/
+/Info/
+/Sample_html/
+
+# Dev server run logs.
+dev-err.log
+dev-out.log
+dev-run.log

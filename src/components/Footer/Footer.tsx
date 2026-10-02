@@ -9,8 +9,8 @@ export function Footer() {
           registered attendees only &mdash; passwords are not published here.
         </p>
         <p className={styles.meta}>
-          &copy; {new Date().getFullYear()} CETL AI Symposium. Held at the Pitman
-          Center.
+          &copy; {new Date().getFullYear()} CETL AI Symposium. Thursday, October 29,
+          2026 &mdash; Bruce Pitman Center.
         </p>
       </div>
     </footer>

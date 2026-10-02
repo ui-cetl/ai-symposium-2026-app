@@ -31,6 +31,13 @@
   --brand-leather: #ab4700;
   --brand-bark: #552301;
 
+  /* Editorial/paper palette — warm neutrals for the program-booklet look */
+  --brand-paper: #faf9f6;
+  --brand-g1: #f1f1ef;
+  --brand-g2: #d8d8d5;
+  --brand-charcoal: #202020;
+  --brand-muted: #5b5b57;
+
   /* Track/category accents — ordered lookup for badge assignment */
   --track-accent-1: var(--brand-lupine);
   --track-accent-2: var(--brand-raspberry);
@@ -42,29 +49,34 @@
   --track-accent-8: var(--brand-bark);
 
   /* Semantic color roles — light theme (default) */
-  --color-bg: var(--brand-white);
-  --color-surface: #f6f5f3;
+  --color-bg: var(--brand-paper);
+  --color-surface: var(--brand-g1);
   --color-surface-raised: var(--brand-white);
-  --color-text: #1c1c1c;
-  --color-text-muted: #565656;
-  --color-border: #d9d9d9;
-  --color-link: #1d4ed8;
-  --color-link-visited: var(--brand-huckleberry);
+  --color-text: var(--brand-charcoal);
+  --color-text-muted: var(--brand-muted);
+  --color-border: var(--brand-g2);
+  --color-link: var(--color-text);
+  --color-link-visited: var(--color-text-muted);
   --color-accent: var(--brand-gold);
   --color-accent-ink: #241a00;
   --color-focus-ring: var(--brand-gold);
 
-  --color-header-bg: var(--brand-white);
-  --color-footer-bg: var(--brand-steel);
-  --color-footer-text: #ededed;
-  /* --brand-silver (#808080) fails WCAG AA against both footer backgrounds
-     below (~3.3:1 light, ~4.5:1 dark) — use this instead for muted footer
-     text; passes AA (>=4.5:1) against both --color-footer-bg values. */
-  --color-footer-text-muted: #b3b3b3;
+  --color-header-bg: var(--color-bg);
+  --color-footer-bg: var(--color-bg);
+  --color-footer-text: var(--color-text-muted);
+  /* Footer is a flat paper band now (no dark fill), so it just shares the
+     body's already-tuned text-contrast tokens instead of needing its own
+     footer-specific muted tone. */
+  --color-footer-text-muted: var(--color-text-muted);
 
   /* Typography */
-  --font-heading: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Newsreader', Georgia, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  --font-body: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  /* Bold display sans — opt-in, used only where a more modern/eye-catching
+     treatment is wanted (currently just Home's "elevated" trial) instead
+     of the editorial serif used everywhere else. */
+  --font-display: 'Unbounded', 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Fluid type scale (Utopia-style clamp) */
@@ -87,10 +99,10 @@
   --space-xl: clamp(2.4rem, 2rem + 1.8vw, 3.4rem);
   --space-2xl: clamp(3.6rem, 3rem + 2.8vw, 5rem);
 
-  --radius-s: 4px;
-  --radius-m: 8px;
-  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --shadow-m: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --radius-s: 1px;
+  --radius-m: 2px;
+  --shadow-s: none;
+  --shadow-m: none;
 
   --max-content-width: 72rem;
   --max-prose-width: 42rem;
@@ -105,24 +117,27 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #17181a;
-  --color-surface: #202226;
-  --color-surface-raised: #26282c;
-  --color-text: #f0f0ef;
-  --color-text-muted: #b9bac0;
-  --color-border: #3a3c40;
-  --color-link: #8ab4ff;
-  --color-link-visited: #b9a6ff;
+  /* "Dark paper" — same flat/hairline/no-shadow grammar as light mode, just
+     inked on warm dark charcoal instead of cream paper. The sample mockup
+     has no dark mode, so these values are hand-authored, not derived. */
+  --color-bg: #1b1a17;
+  --color-surface: #242019;
+  --color-surface-raised: #2d2a24;
+  --color-text: #f2efe6;
+  --color-text-muted: #a8a397;
+  --color-border: #47433b;
+  --color-link: var(--color-text);
+  --color-link-visited: var(--color-text-muted);
   --color-accent: var(--brand-gold);
   --color-accent-ink: #241a00;
   --color-focus-ring: var(--brand-gold);
 
-  --color-header-bg: #1d1f22;
-  --color-footer-bg: #0f1011;
-  --color-footer-text: #d6d6d6;
+  --color-header-bg: var(--color-bg);
+  --color-footer-bg: var(--color-bg);
+  --color-footer-text: var(--color-text-muted);
 
-  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-m: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-s: none;
+  --shadow-m: none;
 
   --badge-text-mix-color: white;
   --badge-text-mix-pct: 50%;

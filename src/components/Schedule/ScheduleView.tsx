@@ -1,119 +1,123 @@
-import type { CSSProperties } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { Schedule } from '../../data/schedule/types'
-import { buildBlockTimeline } from '../../data/schedule/timeline'
-import { addMinutesToTime, formatTime, formatTimeRange } from '../../data/schedule/timing'
+import {
+  getAllSessions,
+  getScheduleEntries,
+  groupEntriesByStartTime,
+  listRoomOptions,
+  listTrackOptions,
+} from '../../data/schedule/sessions'
+import { formatTime, minutesBetween } from '../../data/schedule/timing'
 import { useMySchedule } from '../../hooks/useMySchedule'
 import { BreakCard } from './BreakCard'
-import { PlenaryCard } from './PlenaryCard'
+import { DEFAULT_SCHEDULE_FILTERS, ScheduleToolbar, type ScheduleFilters } from './ScheduleToolbar'
 import { SessionCard } from './SessionCard'
 import styles from './ScheduleView.module.css'
 
 export function ScheduleView({ schedule }: Readonly<{ schedule: Schedule }>) {
   const { isSelected, toggle } = useMySchedule(schedule)
+  const [filters, setFilters] = useState<ScheduleFilters>(DEFAULT_SCHEDULE_FILTERS)
+
+  const allSessions = useMemo(() => getAllSessions(schedule), [schedule])
+  const entries = useMemo(() => getScheduleEntries(schedule), [schedule])
+  const trackOptions = useMemo(() => listTrackOptions(allSessions), [allSessions])
+  const roomOptions = useMemo(() => listRoomOptions(schedule, allSessions), [schedule, allSessions])
+
+  const isFiltering =
+    filters.query.trim() !== '' || filters.track !== 'All' || filters.room !== 'All' || filters.savedOnly
+
+  const filteredEntries = useMemo(() => {
+    const words = filters.query.trim().toLowerCase().split(/\s+/).filter(Boolean)
+
+    return entries.filter((entry) => {
+      if (entry.kind === 'break') return !isFiltering
+
+      const session = entry.session
+      if (filters.track !== 'All' && session.track !== filters.track) return false
+      if (filters.room !== 'All' && entry.location !== filters.room) return false
+      if (filters.savedOnly && !isSelected(session.id)) return false
+      if (words.length > 0) {
+        const haystack = [session.title, session.abstract, session.track, entry.location, ...session.speakers]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+        return words.every((word) => haystack.includes(word))
+      }
+      return true
+    })
+  }, [entries, filters, isFiltering])
+
+  const slots = useMemo(() => groupEntriesByStartTime(schedule, filteredEntries), [schedule, filteredEntries])
+
+  const shownCount = filteredEntries.filter((entry) => entry.kind === 'session').length
+  const resultText = isFiltering
+    ? `Showing ${shownCount} of ${allSessions.length} sessions`
+    : `${allSessions.length} sessions`
+  const savedCount = allSessions.filter((session) => isSelected(session.id)).length
 
   return (
     <div className={styles.schedule}>
-      {schedule.blocks.map((block) => {
-        const blockHeading = (
-          <h2 id={`${block.id}-heading`} className={styles.blockHeading}>
-            {block.label}
-            <span className={styles.blockTime}>{formatTimeRange(block.startTime, block.durationMinutes)}</span>
-          </h2>
-        )
+      <ScheduleToolbar
+        filters={filters}
+        onChange={setFilters}
+        trackOptions={trackOptions}
+        roomOptions={roomOptions}
+        savedCount={savedCount}
+        resultText={resultText}
+        isFiltering={isFiltering}
+        onClear={() => setFilters(DEFAULT_SCHEDULE_FILTERS)}
+      />
 
-        if (block.kind === 'plenary') {
-          return (
-            <section key={block.id} className={styles.block} aria-labelledby={`${block.id}-heading`}>
-              {blockHeading}
-              <ol className={styles.timelineGrid} style={{ '--column-count': 1 } as CSSProperties}>
-                <PlenaryCard block={block} />
-              </ol>
-            </section>
-          )
-        }
-
-        const timeline = buildBlockTimeline(schedule, block)
-        const gridStyle = { '--column-count': timeline.columnCount } as CSSProperties
-
-        return (
-          <section key={block.id} className={styles.block} aria-labelledby={`${block.id}-heading`}>
-            {blockHeading}
-
-            <ol className={styles.timelineGrid} style={gridStyle}>
-              {timeline.entries.map((entry) => {
-                const entryStyle = {
-                  '--col': entry.column + 1,
-                  '--row-start': entry.rowStart,
-                  '--row-span': entry.rowSpan,
-                } as CSSProperties
-                const timeRange = `${formatTime(entry.start)}\u2013${formatTime(entry.end)}`
-
-                if (entry.kind === 'break') {
-                  return (
+      {slots.length === 0 ? (
+        <div className={styles.empty}>
+          <p>
+            {filters.savedOnly && savedCount === 0
+              ? "You haven't added any talks yet. Use the bookmark beside any session to add it."
+              : 'No sessions match these filters.'}
+          </p>
+          <button type="button" className={styles.clearEmpty} onClick={() => setFilters(DEFAULT_SCHEDULE_FILTERS)}>
+            Clear filters
+          </button>
+        </div>
+      ) : (
+        <ol className={styles.spineList}>
+          {slots.map((slot) => (
+            <li key={slot.start} className={styles.slot}>
+              <p className={styles.slotTime}>
+                {formatTime(slot.start)}
+                <span className={styles.slotUntil}>until {formatTime(slot.end)}</span>
+              </p>
+              <ul className={styles.slotEntries}>
+                {slot.entries.map((entry) =>
+                  entry.kind === 'break' ? (
                     <BreakCard
                       key={entry.key}
-                      timeRange={timeRange}
-                      durationMinutes={entry.durationMinutes}
+                      timeRange={`${formatTime(entry.start)}–${formatTime(entry.end)}`}
+                      durationMinutes={minutesBetween(entry.start, entry.end)}
                       label={entry.label}
-                      style={entryStyle}
                     />
-                  )
-                }
-
-                const session = entry.session
-                if (!session) return null
-
-                return (
-                  <SessionCard
-                    key={entry.key}
-                    id={session.id}
-                    timeRange={timeRange}
-                    location={entry.location}
-                    title={session.title}
-                    speakers={session.speakers}
-                    track={session.track}
-                    abstract={session.abstract}
-                    isSelected={isSelected(session.id)}
-                    onToggleSelect={() => toggle(session.id)}
-                    style={entryStyle}
-                  />
-                )
-              })}
-            </ol>
-          </section>
-        )
-      })}
-
-      <section className={styles.block} aria-labelledby="virtual-track-heading">
-        <h2 id="virtual-track-heading" className={styles.blockHeading}>
-          Virtual Sessions
-        </h2>
-
-        <ol className={styles.timelineGrid} style={{ '--column-count': 1 } as CSSProperties}>
-          {schedule.virtualTrack.map((session) => {
-            const end = addMinutesToTime(session.startTime, session.durationMinutes)
-            const timeRange = `${formatTime(session.startTime)}\u2013${formatTime(end)}`
-
-            return (
-              <SessionCard
-                key={session.id}
-                id={session.id}
-                timeRange={timeRange}
-                location="Remote"
-                title={session.title}
-                speakers={session.speakers}
-                track={session.track}
-                abstract={session.abstract}
-                joinInfo={session.joinInfo}
-                isSelected={isSelected(session.id)}
-                onToggleSelect={() => toggle(session.id)}
-              />
-            )
-          })}
+                  ) : (
+                    <SessionCard
+                      key={entry.key}
+                      id={entry.session.id}
+                      timeRange={entry.session.timeRange}
+                      location={entry.session.location}
+                      title={entry.session.title}
+                      speakers={entry.session.speakers}
+                      track={entry.session.track}
+                      abstract={entry.session.abstract}
+                      joinInfo={entry.session.joinInfo}
+                      isSelected={isSelected(entry.session.id)}
+                      onToggleSelect={() => toggle(entry.session.id)}
+                    />
+                  ),
+                )}
+              </ul>
+            </li>
+          ))}
         </ol>
-      </section>
+      )}
     </div>
   )
 }
-

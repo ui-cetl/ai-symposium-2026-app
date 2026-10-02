@@ -6,6 +6,19 @@
 
 .heading {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-3);
+  letter-spacing: -0.005em;
+}
+
+.heading::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: var(--color-accent);
+  margin-bottom: var(--space-xs);
 }
 
 .empty {
@@ -18,6 +31,7 @@
   font-weight: 600;
   color: var(--color-accent-ink);
   background: var(--color-accent);
+  border: 1px solid var(--color-accent);
   padding: var(--space-s) var(--space-l);
   border-radius: var(--radius-m);
   text-decoration: none;
@@ -28,9 +42,16 @@
 }
 
 .cta:hover {
-  background: color-mix(in srgb, var(--color-accent) 85%, var(--color-text));
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-accent);
 }
 
+/* Cards here are the bolder "elevated" variant (their own border + shadow),
+   so the list itself stays a plain gap-spaced stack rather than the
+   hairline-spine treatment used on the flat Schedule page — mixing both
+   would look cluttered. Single column, not a grid: this is a chronological
+   itinerary, and a multi-column reflow would obscure the time order. */
 .list {
   display: flex;
   flex-direction: column;

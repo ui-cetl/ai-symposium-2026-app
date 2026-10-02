@@ -1,28 +1,19 @@
 import type { CSSProperties } from 'react'
 
+import { accentVarForTrack } from '../../data/trackColor'
 import styles from './TrackBadge.module.css'
 
-const TRACK_ACCENT_VARS = [
-  '--track-accent-1',
-  '--track-accent-2',
-  '--track-accent-3',
-  '--track-accent-4',
-  '--track-accent-5',
-  '--track-accent-6',
-  '--track-accent-7',
-  '--track-accent-8',
-] as const
-
-/** Deterministically assigns one of the 8 brand accent colors to a track name. */
-function accentVarForTrack(track: string): string {
-  let hash = 0
-  for (let i = 0; i < track.length; i++) {
-    hash = (hash * 31 + (track.codePointAt(i) ?? 0)) >>> 0
-  }
-  return TRACK_ACCENT_VARS[hash % TRACK_ACCENT_VARS.length]
+export interface TrackBadgeProps {
+  track: string
+  /** Gold border/text, no per-track hue — used inside Home's always-dark elevated cards. */
+  monochrome?: boolean
 }
 
-export function TrackBadge({ track }: Readonly<{ track: string }>) {
+export function TrackBadge({ track, monochrome }: Readonly<TrackBadgeProps>) {
+  if (monochrome) {
+    return <span className={`${styles.badge} ${styles.badgeMono}`}>{track}</span>
+  }
+
   const style = { '--badge-color': `var(${accentVarForTrack(track)})` } as CSSProperties
 
   return (

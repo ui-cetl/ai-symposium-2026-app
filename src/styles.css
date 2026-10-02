@@ -25,6 +25,7 @@ body,
 
 html {
   color-scheme: light;
+  overflow-x: hidden;
 }
 
 html[data-theme='dark'] {
@@ -38,6 +39,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--step-0);
   line-height: var(--leading-normal);
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -47,12 +49,14 @@ h3,
 h4 {
   font-family: var(--font-heading);
   line-height: var(--leading-tight);
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 0 var(--space-s);
 }
 
 h1 {
   font-size: var(--step-4);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 h2 {
   font-size: var(--step-3);
@@ -70,6 +74,15 @@ p {
 
 a {
   color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.25s;
+}
+
+a:hover {
+  text-decoration-color: var(--color-accent);
 }
 
 a:visited {
@@ -83,8 +96,27 @@ svg {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus-ring);
+  outline: 2px solid var(--color-text);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-accent);
+  border-radius: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-m);
+  top: -3rem;
+  z-index: 50;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  padding: var(--space-xs) var(--space-s);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: var(--space-m);
 }
 
 
